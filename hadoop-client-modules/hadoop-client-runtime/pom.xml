@@ -164,6 +164,7 @@
                       <exclude>org.ow2.asm:*</exclude>
                       <!-- Leave bouncycastle unshaded because it's signed with a special Oracle certificate so it can be a custom JCE security provider -->
                       <exclude>org.bouncycastle:*</exclude>
+                      <exclude>org.jsr-305:ri</exclude>
                     </excludes>
                   </artifactSet>
                   <filters>
