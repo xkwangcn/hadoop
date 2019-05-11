@@ -45,12 +45,12 @@ ENV JAVA_HOME=/etc/alternatives/jre
 
 ENV HADOOP_VERSION 3.1.1
 
-ENV HADOOP_CLASSPATH=/opt/hadoop-$HADOOP_VERSION/share/hadoop/tools/lib/*
+ENV HADOOP_HOME=/opt/hadoop
+ENV HADOOP_CLASSPATH=$HADOOP_HOME/share/hadoop/tools/lib/*
 ENV HADOOP_CONF_DIR=/etc/hadoop
-ENV HADOOP_HOME=/opt/hadoop-$HADOOP_VERSION
 ENV PATH=$HADOOP_HOME/bin:$PATH
 
-COPY --from=build /build/hadoop-dist/target/hadoop-$HADOOP_VERSION /opt/hadoop-$HADOOP_VERSION
+COPY --from=build /build/hadoop-dist/target/hadoop-$HADOOP_VERSION /opt/hadoop
 # remove unnecessary doc/src files
 RUN rm -rf ${HADOOP_HOME}/share/doc \
     && for dir in common hdfs mapreduce tools yarn; do \
@@ -61,11 +61,7 @@ RUN rm -rf ${HADOOP_HOME}/share/doc \
     && rm -rf ${HADOOP_HOME}/share/hadoop/yarn/test \
     && find ${HADOOP_HOME}/share/hadoop -name *test*.jar | xargs rm -rf
 
-RUN ln -s /opt/hadoop-$HADOOP_VERSION/etc/hadoop /etc/hadoop
-RUN ln -s /opt/hadoop-$HADOOP_VERSION /opt/hadoop
-RUN mkdir -p /opt/hadoop-$HADOOP_VERSION/logs
-
-RUN useradd hadoop -m -u 1002 -d $HADOOP_HOME
+RUN mkdir -p /opt/hadoop/logs
 
 # https://docs.oracle.com/javase/7/docs/technotes/guides/net/properties.html
 # Java caches dns results forever, don't cache dns results forever:
@@ -73,6 +69,8 @@ RUN sed -i '/networkaddress.cache.ttl/d' $JAVA_HOME/lib/security/java.security
 RUN sed -i '/networkaddress.cache.negative.ttl/d' $JAVA_HOME/lib/security/java.security
 RUN echo 'networkaddress.cache.ttl=0' >> $JAVA_HOME/lib/security/java.security
 RUN echo 'networkaddress.cache.negative.ttl=0' >> $JAVA_HOME/lib/security/java.security
+
+RUN useradd hadoop -m -u 1002 -d $HADOOP_HOME
 
 # imagebuilder expects the directory to be created before VOLUME
 RUN mkdir -p /hadoop/dfs/data /hadoop/dfs/name
