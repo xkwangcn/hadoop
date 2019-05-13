@@ -8,7 +8,7 @@ RUN yum -y install --setopt=skip_missing_names_on_install=False epel-release
 RUN yum -y install --setopt=skip_missing_names_on_install=False \
     java-11-openjdk-devel \
     java-11-openjdk \
-    protobuf protobuf-compiler \
+    protobuf protobuf-compiler protobuf-devel \
     patch \
     which \
     cyrus-sasl-devel \
