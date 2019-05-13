@@ -2,21 +2,20 @@ FROM centos:7 as build
 
 RUN yum -y update && yum clean all
 
-# newer maven
-RUN yum -y install --setopt=skip_missing_names_on_install=False centos-release-scl
 # cmake3
 RUN yum -y install --setopt=skip_missing_names_on_install=False epel-release
 
 RUN yum -y install --setopt=skip_missing_names_on_install=False \
     java-11-openjdk-devel \
     java-11-openjdk \
-    rh-maven33 \
     protobuf protobuf-compiler \
     patch \
     lzo-devel zlib-devel gcc gcc-c++ make autoconf automake libtool openssl-devel fuse-devel \
     cmake3 \
     && yum clean all \
     && rm -rf /var/cache/yum
+
+RUN rpm -i https://rpmfind.net/linux/fedora/linux/releases/28/Everything/x86_64/os/Packages/m/maven-3.5.2-5.fc28.noarch.rpm
 
 RUN ln -s /usr/bin/cmake3 /usr/bin/cmake
 
@@ -46,7 +45,7 @@ COPY README.txt /build/README.txt
 ENV CMAKE_C_COMPILER=gcc CMAKE_CXX_COMPILER=g++
 
 WORKDIR /build
-RUN scl enable rh-maven33 'mvn -B -e -Dtest=false -DskipTests -Dmaven.javadoc.skip=true clean package -Pdist,native -Dtar'
+RUN mvn -B -e -Dtest=false -DskipTests -Dmaven.javadoc.skip=true clean package -Pdist,native -Dtar
 
 FROM centos:7
 
