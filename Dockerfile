@@ -11,6 +11,7 @@ RUN yum -y install --setopt=skip_missing_names_on_install=False \
     protobuf protobuf-compiler \
     patch \
     which \
+    cyrus-sasl-devel \
     lzo-devel zlib-devel gcc gcc-c++ make autoconf automake libtool openssl-devel fuse-devel \
     cmake3 \
     && yum clean all \
