@@ -59,6 +59,7 @@ COPY NOTICE.txt /build/NOTICE.txt
 COPY README.txt /build/README.txt
 
 ENV CMAKE_C_COMPILER=gcc CMAKE_CXX_COMPILER=g++
+ENV JAVA_HOME=/etc/alternatives/jre
 
 WORKDIR /build
 RUN mvn -B -e -Dtest=false -DskipTests -Dmaven.javadoc.skip=true clean package -Pdist,native -Dtar
