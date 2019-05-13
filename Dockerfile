@@ -8,8 +8,8 @@ RUN yum -y install --setopt=skip_missing_names_on_install=False centos-release-s
 RUN yum -y install --setopt=skip_missing_names_on_install=False epel-release
 
 RUN yum -y install --setopt=skip_missing_names_on_install=False \
-    java-1.8.0-openjdk-devel \
-    java-1.8.0-openjdk \
+    java-11-openjdk-devel \
+    java-11-openjdk \
     rh-maven33 \
     protobuf protobuf-compiler \
     patch \
@@ -53,8 +53,8 @@ FROM centos:7
 RUN yum install --setopt=skip_missing_names_on_install=False -y \
         epel-release \
     && yum install --setopt=skip_missing_names_on_install=False -y \
-        java-1.8.0-openjdk \
-        java-1.8.0-openjdk-devel \
+        java-11-openjdk \
+        java-11-openjdk-devel \
         curl \
         less  \
         procps \
