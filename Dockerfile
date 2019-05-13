@@ -38,6 +38,7 @@ COPY hadoop-yarn-project /build/hadoop-yarn-project
 COPY hadoop-assemblies /build/hadoop-assemblies
 COPY hadoop-project /build/hadoop-project
 COPY hadoop-common-project /build/hadoop-common-project
+COPY hadoop-hdds /build/hadoop-hdds
 COPY hadoop-cloud-storage-project /build/hadoop-cloud-storage-project
 COPY hadoop-project-dist /build/hadoop-project-dist
 COPY hadoop-maven-plugins /build/hadoop-maven-plugins
@@ -46,7 +47,9 @@ COPY hadoop-minicluster /build/hadoop-minicluster
 COPY hadoop-mapreduce-project /build/hadoop-mapreduce-project
 COPY hadoop-tools /build/hadoop-tools
 COPY hadoop-hdfs-project /build/hadoop-hdfs-project
+COPY hadoop-ozone /build/hadoop-ozone
 COPY hadoop-client-modules /build/hadoop-client-modules
+COPY hadoop-submarine /build/hadoop-submarine
 COPY hadoop-build-tools /build/hadoop-build-tools
 COPY dev-support /build/dev-support
 COPY pom.xml /build/pom.xml
