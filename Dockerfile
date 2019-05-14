@@ -17,7 +17,6 @@ RUN yum -y install --setopt=skip_missing_names_on_install=False \
     && yum clean all \
     && rm -rf /var/cache/yum
 
-
 #Install maven
 # set installed Maven version you can easily change it later
 ENV MAVEN_VERSION 3.6.0
@@ -83,7 +82,7 @@ RUN yum install --setopt=skip_missing_names_on_install=False -y \
 
 ENV JAVA_HOME=/etc/alternatives/jre
 
-ENV HADOOP_VERSION 3.1.1
+ENV HADOOP_VERSION 3.3.0-SNAPSHOT
 
 ENV HADOOP_HOME=/opt/hadoop
 ENV HADOOP_CLASSPATH=$HADOOP_HOME/share/hadoop/tools/lib/*
