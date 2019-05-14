@@ -57,7 +57,7 @@ COPY README.txt /build/README.txt
 ENV CMAKE_C_COMPILER=gcc CMAKE_CXX_COMPILER=g++
 
 WORKDIR /build
-RUN mvn -B -e -Dtest=false -DskipTests -Dmaven.javadoc.skip=true clean package -Pdist,native -Dtar
+RUN mvn --quiet -B -e -Dtest=false -DskipTests -Dmaven.javadoc.skip=true clean package -Pdist,native -Dtar
 
 FROM centos:7
 
