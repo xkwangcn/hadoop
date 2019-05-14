@@ -100,7 +100,8 @@ RUN rm -rf ${HADOOP_HOME}/share/doc \
     && rm -rf ${HADOOP_HOME}/share/hadoop/yarn/test \
     && find ${HADOOP_HOME}/share/hadoop -name *test*.jar | xargs rm -rf
 
-RUN mkdir -p /opt/hadoop/logs
+RUN ln -s $HADOOP_HOME/etc/hadoop $HADOOP_CONF_DIR
+RUN mkdir -p $HADOOP_HOME/logs
 
 # https://docs.oracle.com/javase/7/docs/technotes/guides/net/properties.html
 # Java caches dns results forever, don't cache dns results forever:
