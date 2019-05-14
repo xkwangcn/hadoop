@@ -8,9 +8,10 @@ RUN yum -y install --setopt=skip_missing_names_on_install=False epel-release
 RUN yum -y install --setopt=skip_missing_names_on_install=False \
     java-11-openjdk-devel \
     java-11-openjdk \
-    protobuf protobuf-compiler \
+    protobuf protobuf-compiler protobuf-devel \
     patch \
     which \
+    cyrus-sasl-devel \
     lzo-devel zlib-devel gcc gcc-c++ make autoconf automake libtool openssl-devel fuse-devel \
     cmake3 \
     && yum clean all \
@@ -55,6 +56,7 @@ COPY NOTICE.txt /build/NOTICE.txt
 COPY README.txt /build/README.txt
 
 ENV CMAKE_C_COMPILER=gcc CMAKE_CXX_COMPILER=g++
+ENV JAVA_HOME=/etc/alternatives/jre
 
 WORKDIR /build
 RUN mvn --quiet -B -e -Dtest=false -DskipTests -Dmaven.javadoc.skip=true clean package -Pdist,native -Dtar
@@ -78,7 +80,7 @@ RUN yum install --setopt=skip_missing_names_on_install=False -y \
 
 ENV JAVA_HOME=/etc/alternatives/jre
 
-ENV HADOOP_VERSION 3.1.1
+ENV HADOOP_VERSION 3.2.0
 
 ENV HADOOP_HOME=/opt/hadoop
 ENV HADOOP_CLASSPATH=$HADOOP_HOME/share/hadoop/tools/lib/*
